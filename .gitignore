@@ -1,0 +1,49 @@
+# Ignore object files, libraries, and executables
+*.o
+*.a
+*.so
+*.exe
+
+# Ignore build directories
+/build/
+/bin/
+/obj/
+/out/
+/data/
+
+# Ignore CMake build directories
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+
+# Ignore Visual Studio files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+
+# Ignore Code::Blocks files
+*.cbp
+*.layout
+
+# Ignore Qt Creator files
+*.pro.user
+*.qmake.stash
+
+# Ignore other IDE specific files
+.idea/
+.vscode/
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Ignore compiled dynamic libraries
+*.dll
+*.dylib
+
+# Ignore test binaries
+/test-bin/
