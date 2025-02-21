@@ -20,4 +20,5 @@ class Account {
 
         string getAccountNumber() const {return accountNumber;}
         double getBalance() const {return balance;}
-}
+};
+#endif
