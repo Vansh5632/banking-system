@@ -1,25 +1,19 @@
 #include <iostream>
 #include "AuthManager.h"
-#include "SavingsAccount.h"
-#include "CheckingAccount.h"
+#include "Bank.h"
 
 using namespace std;
 
 int main() {
-    // Authentication Step
     AuthManager auth;
+    Bank bank;
+    bank.loadAccounts();
+
     int authChoice;
-    
-    cout << "===================================" << endl;
-    cout << "  Welcome to Simple Banking System " << endl;
-    cout << "===================================" << endl;
-    cout << "1. Register" << endl;
-    cout << "2. Login" << endl;
-    cout << "Enter your choice: ";
+    cout << "1. Register\n2. Login\nEnter your choice: ";
     cin >> authChoice;
 
     string username, password;
-    
     cout << "Enter username: ";
     cin >> username;
     cout << "Enter password: ";
@@ -28,29 +22,23 @@ int main() {
     if (authChoice == 1) {
         auth.registerUser(username, password);
     } else if (authChoice == 2) {
-        if (!auth.loginUser(username, password)) {
-            cout << "Exiting program!" << endl;
-            return 0;
-        }
+        if (!auth.loginUser(username, password)) return 0;
     } else {
-        cout << "Invalid choice! Exiting program." << endl;
         return 0;
     }
 
-    // Account Testing
-    SavingsAccount mySavings("S12345", "Alice", 1000.0, 5.0);
-    CheckingAccount myChecking("C67890", "Bob", 500.0, 200.0);
+    int choice;
+    while (true) {
+        cout << "\n1. Create Account\n2. Deposit Money\n3. Withdraw Money\n4. Check Balance\n5. Exit\nEnter choice: ";
+        cin >> choice;
 
-    cout << "\nTesting Savings Account:\n";
-    mySavings.deposit(200);
-    mySavings.addInterest();
-    mySavings.withdraw(500);
-    mySavings.displayAccount();
-
-    cout << "\nTesting Checking Account:\n";
-    myChecking.deposit(100);
-    myChecking.withdraw(700);
-    myChecking.displayAccount();
-
-    return 0;
+        switch (choice) {
+            case 1: bank.createAccount(); break;
+            case 2: bank.depositMoney(); break;
+            case 3: bank.withdrawMoney(); break;
+            case 4: bank.checkBalance(); break;
+            case 5: return 0;
+            default: cout << "Invalid choice!" << endl;
+        }
+    }
 }

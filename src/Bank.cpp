@@ -8,7 +8,8 @@ Bank::~Bank(){
 }
 
 void Bank::createAccount(){
-    string name,accNum,type;
+    string name,accNum;
+    int type;
     double initialBalance;
 
     cout<<"Enter name: ";
@@ -21,12 +22,12 @@ void Bank::createAccount(){
     cin>>type;
 
     Account *account = nullptr;
-    if(type == "Savings"){
+    if(type == 1){
         double interestRate;
         cout<<"Enter interest rate: ";
         cin>>interestRate;
         account = new SavingsAccount(accNum,name,initialBalance,interestRate);
-    }else if(type == "Current"){
+    }else if(type == 2){
         double overdraftLimit;
         cout<<"Enter overdraft limit: ";
         cin>>overdraftLimit;
