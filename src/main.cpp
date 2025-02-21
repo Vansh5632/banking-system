@@ -43,7 +43,7 @@ int main() {
 
     cout << "\nTesting Savings Account:\n";
     mySavings.deposit(200);
-    mySavings.applyInterest();
+    mySavings.addInterest();
     mySavings.withdraw(500);
     mySavings.displayAccount();
 
