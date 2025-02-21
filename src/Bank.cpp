@@ -65,3 +65,61 @@ void Bank::depositMoney(){
     saveAccounts();
     cout<<"Amount deposited successfully"<<endl;
 }
+
+void Bank::withdrawMoney(){
+    string accNum;
+    double amount;
+    cout<<"Enter account number: ";
+    cin>>accNum;
+    Account *account = findAccount(accNum);
+    if(account == nullptr){
+        cout<<"Account not found"<<endl;
+        return;
+    }
+    cout<<"Enter amount to withdraw: ";
+    cin>>amount;
+    if(account->withdraw(amount)){
+        saveAccounts();
+        cout<<"Amount withdrawn successfully"<<endl;
+    }else{
+        cout<<"Insufficient balance"<<endl;
+    }
+}
+
+void Bank::checkBalance(){
+    string accNum;
+    cout<<"Enter account number: ";
+    cin>>accNum;
+    Account *account = findAccount(accNum);
+    if(account == nullptr){
+        cout<<"Account not found"<<endl;
+        return;
+    }
+    account->displayAccount();
+}
+void Bank::saveAccounts(){
+    ofstream file("accounts.txt");
+    if(file.is_open()){
+        for(auto account : accounts){
+            file<<account->getAccountNumber()<<endl;
+            file<<account->getBalance()<<endl;
+        }
+        file.close();
+    }else{
+        cout<<"Error saving accounts"<<endl;
+    }
+}
+void Bank::loadAccounts(){
+    ifstream file("accounts.txt");
+    if(file.is_open()){
+        string accNum;
+        double balance;
+        while(file>>accNum>>balance){
+            Account *account = new Account(accNum,"",balance);
+            accounts.push_back(account);
+        }
+        file.close();
+    }else{
+        cout<<"Error loading accounts"<<endl;
+    }
+}
