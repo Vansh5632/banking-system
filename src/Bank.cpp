@@ -39,3 +39,29 @@ void Bank::createAccount(){
     saveAccounts();
     cout<<"Account created successfully"<<endl;
 }
+
+Account* Bank::findAccount(const string &accNum){
+    for(auto account : accounts){
+        if(account->getAccountNumber() == accNum){
+            return account;
+        }
+    }
+    return nullptr;
+}
+
+void Bank::depositMoney(){
+    string accNum;
+    double amount;
+    cout<<"Enter account number: ";
+    cin>>accNum;
+    Account *account = findAccount(accNum);
+    if(account == nullptr){
+        cout<<"Account not found"<<endl;
+        return;
+    }
+    cout<<"Enter amount to deposit: ";
+    cin>>amount;
+    account->deposit(amount);
+    saveAccounts();
+    cout<<"Amount deposited successfully"<<endl;
+}
